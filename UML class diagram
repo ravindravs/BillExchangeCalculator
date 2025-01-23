@@ -1,0 +1,99 @@
++-----------------------------------+
+|        <<interface>>              |
+| CurrencyExchangeService           |
+|-----------------------------------|
+| + getExchangeRate(base: String,   |
+|   target: String): double         |
++-----------------------------------+
+                ^
+                |
+                |
++-----------------------------------+
+| CurrencyExchangeServiceImpl       |
+|-----------------------------------|
+| - apiKey: String                  |
+| - baseUrl: String                 |
+|-----------------------------------|
+| + getExchangeRate(base: String,   |
+|   target: String): double         |
++-----------------------------------+
+
++-----------------------------------+
+|        <<interface>>              |
+| DiscountService                   |
+|-----------------------------------|
+| + calculateDiscount(bill: Bill):  |
+|   double                          |
++-----------------------------------+
+                ^
+                |
+                |
++-----------------------------------+
+| DiscountServiceImpl               |
+|-----------------------------------|
+|-----------------------------------|
+| + calculateDiscount(bill: Bill):  |
+|   double                          |
++-----------------------------------+
+
++-----------------------------------+
+|        <<interface>>              |
+| BillCalculationService            |
+|-----------------------------------|
+| + calculateFinalAmount(bill: Bill):|
+|   double                          |
++-----------------------------------+
+                ^
+                |
+                |
++-----------------------------------+
+| BillCalculationServiceImpl        |
+|-----------------------------------|
+| - currencyExchangeService:        |
+|   CurrencyExchangeService         |
+| - discountService: DiscountService|
+|-----------------------------------|
+| + calculateFinalAmount(bill: Bill):|
+|   double                          |
++-----------------------------------+
+
++-----------------------------------+
+| Item                              |
+|-----------------------------------|
+| - name: String                    |
+| - category: String                |
+| - price: double                   |
+|-----------------------------------|
+| + getters and setters             |
++-----------------------------------+
+
++-----------------------------------+
+| Bill                              |
+|-----------------------------------|
+| - items: List<Item>               |
+| - userType: String                |
+| - tenure: int                     |
+| - originalCurrency: String        |
+| - targetCurrency: String          |
+|-----------------------------------|
+| + getters and setters             |
++-----------------------------------+
+
++-----------------------------------+
+| ExchangeResponse                  |
+|-----------------------------------|
+| - conversionRates: Map<String,    |
+|   Double>                         |
+|-----------------------------------|
+| + getters and setters             |
++-----------------------------------+
+
++-----------------------------------+
+| BillController                    |
+|-----------------------------------|
+| - billCalculationService:         |
+|   BillCalculationService          |
+|-----------------------------------|
+| + calculate(bill: Bill): Response |
+|   Entity<Double>                  |
++-----------------------------------+
